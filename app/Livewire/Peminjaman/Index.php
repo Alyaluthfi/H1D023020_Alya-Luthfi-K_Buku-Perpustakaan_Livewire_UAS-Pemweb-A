@@ -7,13 +7,19 @@ use App\Models\Peminjaman;
 
 class Index extends Component
 {
-    public function render()
+        public function render()
     {
         $totalDipinjam = Peminjaman::whereNull('tanggal_kembali')->count();
 
         $peminjamans = Peminjaman::with(['buku', 'anggota'])->get();
 
         return view('livewire.peminjaman.index', compact('peminjamans', 'totalDipinjam'))
-        ->layout('layouts.app');
+            ->layout('layouts.app');
+    }
+
+        public function delete($id)
+    {
+        Peminjaman::findOrFail($id)->delete();
+        session()->flash('message', 'Peminjaman berhasil dihapus.');
     }
 }

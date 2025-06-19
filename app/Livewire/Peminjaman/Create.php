@@ -23,7 +23,7 @@ class Create extends Component
             'anggota_id' => 'required|exists:anggotas,id',
             'buku_id' => 'required|exists:bukus,id',
             'tanggal_pinjam' => 'required|date',
-            'tanggal_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
+            'tanggal_kembali' => 'nullable|date|after_or_equal:tanggal_pinjam',
         ]);
 
         $jumlahPinjaman = Peminjaman::where('anggota_id', $this->anggota_id)
@@ -31,9 +31,10 @@ class Create extends Component
             ->count();
 
         if ($jumlahPinjaman >= 3) {
-            session()->flash('message', 'Anggota telah meminjam 3 buku bulan ini.');
+            $this->flashMessage = 'Anggota telah meminjam 3 buku bulan ini.';
             return;
         }
+
 
         Peminjaman::create([
             'anggota_id' => $this->anggota_id,
@@ -53,4 +54,6 @@ class Create extends Component
             'anggotas' => Anggota::all()
         ])->layout('layouts.app');
     }
+    public $flashMessage = '';
+
 }

@@ -15,4 +15,11 @@ class Index extends Component
             'anggotas' => Anggota::all(),
         ]);
     }
+       public function delete($id)
+    {
+        $anggota = \App\Models\Anggota::findOrFail($id);
+        $anggota->delete();
+
+        session()->flash('message', 'Data anggota berhasil dihapus.');
+    }
 }

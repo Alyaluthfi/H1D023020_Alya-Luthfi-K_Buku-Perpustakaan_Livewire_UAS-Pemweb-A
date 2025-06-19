@@ -12,6 +12,11 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+
 // ✨ Import Komponen Livewire
 use App\Livewire\Buku\Index as BukuIndex;
 use App\Livewire\Buku\Create as BukuCreate;
@@ -23,6 +28,7 @@ use App\Livewire\Anggota\Edit as AnggotaEdit;
 
 use App\Livewire\Peminjaman\Index as PeminjamanIndex;
 use App\Livewire\Peminjaman\Create as PeminjamanCreate;
+use App\Livewire\Peminjaman\Edit as PeminjamanEdit;
 
 use App\Livewire\Kategori\Index as KategoriIndex;
 use App\Livewire\Rak\Index as RakIndex;
@@ -41,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     // 🔄 Peminjaman
     Route::get('/peminjaman', PeminjamanIndex::class)->name('peminjaman.index');
     Route::get('/peminjaman/create', PeminjamanCreate::class)->name('peminjaman.create');
+    Route::get('/peminjaman/{id}/edit', PeminjamanEdit::class)->name('peminjaman.edit');
 
     // 🗂️ Kategori
     Route::get('/kategori', KategoriIndex::class)->name('kategori.index');

@@ -31,7 +31,19 @@ new class extends Component
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                        <img src="{{ asset('img/logo.gif') }}" alt="Logo Buku" class="w-10 h-10 rounded-lg">
+                        <span class="text-pink-600 text-lg font-bold">Dashboard Perpustakaan</span>
+                    </x-nav-link>
+                     <x-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.*')" class="text-pink-700 hover:text-pink-900">
+                        📚 Buku
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.*')" class="text-pink-700 hover:text-pink-900">
+                        👤 Anggota
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('peminjaman.index')" :active="request()->routeIs('peminjaman.*')" class="text-pink-700 hover:text-pink-900">
+                        📖 Riwayat
                     </x-nav-link>
                 </div>
             </div>
@@ -81,11 +93,19 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-pink-700">
+                🎀 Dashboard Sistem Perpustakaan
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.*')" class="text-pink-700">
+                📚 Buku
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('anggota.index')" :active="request()->routeIs('anggota.*')" class="text-pink-700">
+                👤 Anggota
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('peminjaman.index')" :active="request()->routeIs('peminjaman.*')" class="text-pink-700">
+                📖 Riwayat
             </x-responsive-nav-link>
         </div>
-
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
